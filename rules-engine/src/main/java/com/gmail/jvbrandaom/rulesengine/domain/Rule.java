@@ -10,11 +10,11 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Rule implements Serializable {
-    private Integer minTemperature = Integer.MIN_VALUE;
-    private Integer maxTemperature = Integer.MAX_VALUE;
+    private Double minTemperature = -Double.MAX_VALUE;
+    private Double maxTemperature = Double.MAX_VALUE;
     private String genre;
 
-    public Boolean isTemperatureInRuleRange(Integer temperature) {
+    public Boolean isTemperatureInRuleRange(Double temperature) {
         return (minTemperature <= temperature) && (maxTemperature >= temperature);
     }
 }

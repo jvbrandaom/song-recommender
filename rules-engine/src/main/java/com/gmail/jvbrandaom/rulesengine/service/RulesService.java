@@ -15,7 +15,7 @@ public class RulesService {
 
     public final static String DEFAULT_GENRE = "pop";
 
-    public String getSongGenre(Integer temperature) throws IOException {
+    public String getSongGenre(Double temperature) throws IOException {
         List<Rule> rules = rulesRepository.getRules();
         return rules.stream().filter(rule -> rule.isTemperatureInRuleRange(temperature)).map(Rule::getGenre).findFirst().orElse(DEFAULT_GENRE);
     }

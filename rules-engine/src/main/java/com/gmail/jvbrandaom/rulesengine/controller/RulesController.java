@@ -15,7 +15,7 @@ public class RulesController {
     private RulesService rulesService;
 
     @GetMapping("/song/genre/{temperature}")
-    public String getGenreBasedOnTemperature(@PathVariable Integer temperature) throws IOException {
+    public String getGenreBasedOnTemperature(@PathVariable Double temperature) throws IOException {
         return rulesService.getSongGenre(temperature);
     }
 }

@@ -27,17 +27,17 @@ public class RulesServiceTest extends BaseTest {
     @Test
     public void testGetSongGenre() throws IOException {
         Rule rule1 = new Rule();
-        rule1.setMaxTemperature(0);
+        rule1.setMaxTemperature(0.0);
         rule1.setGenre("black metal");
-        Rule rule2 = new Rule(1, 9, "doom metal");
-        Rule rule3 = new Rule(10, 20, "death metal");
-        Rule rule4 = new Rule(21, 30, "trash metal");
+        Rule rule2 = new Rule(1.0, 9.5, "doom metal");
+        Rule rule3 = new Rule(10.0, 20.0, "death metal");
+        Rule rule4 = new Rule(21.78, 30.0, "trash metal");
 
         when(rulesRepository.getRules()).thenReturn(Arrays.asList(rule1, rule2, rule3, rule4));
-        assertEquals("death metal", rulesService.getSongGenre(15));
-        assertEquals("trash metal", rulesService.getSongGenre(24));
-        assertEquals("doom metal", rulesService.getSongGenre(1));
-        assertEquals("black metal", rulesService.getSongGenre(-40));
-        assertEquals(RulesService.DEFAULT_GENRE, rulesService.getSongGenre(50));
+        assertEquals("death metal", rulesService.getSongGenre(15.0));
+        assertEquals("trash metal", rulesService.getSongGenre(24.0));
+        assertEquals("doom metal", rulesService.getSongGenre(1.0));
+        assertEquals("black metal", rulesService.getSongGenre(-40.0));
+        assertEquals(RulesService.DEFAULT_GENRE, rulesService.getSongGenre(50.0));
     }
 }
