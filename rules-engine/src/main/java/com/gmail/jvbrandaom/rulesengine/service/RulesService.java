@@ -1,6 +1,7 @@
 package com.gmail.jvbrandaom.rulesengine.service;
 
 import com.gmail.jvbrandaom.rulesengine.domain.Rule;
+import com.gmail.jvbrandaom.rulesengine.exception.RuleParsingException;
 import com.gmail.jvbrandaom.rulesengine.repository.RulesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class RulesService {
 
     public final static String DEFAULT_GENRE = "pop";
 
-    public String getSongGenre(Double temperature) throws IOException {
+    public String getSongGenre(Double temperature) throws RuleParsingException {
         List<Rule> rules = rulesRepository.getRules();
         return rules.stream().filter(rule -> rule.isTemperatureInRuleRange(temperature)).map(Rule::getGenre).findFirst().orElse(DEFAULT_GENRE);
     }

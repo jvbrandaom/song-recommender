@@ -1,6 +1,7 @@
 package com.gmail.jvbrandaom.rulesengine;
 
 import com.gmail.jvbrandaom.rulesengine.domain.Rule;
+import com.gmail.jvbrandaom.rulesengine.exception.RuleParsingException;
 import com.gmail.jvbrandaom.rulesengine.repository.RulesRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +22,7 @@ public class RulesEngineApplicationTests {
 	private RulesRepository rulesRepository;
 
 	@Test
-	public void testGetRules() throws IOException {
+	public void testGetRules() throws RuleParsingException {
 		List<Rule> rules = rulesRepository.getRules();
 		assertTrue(rules.size() > 0);
 	}

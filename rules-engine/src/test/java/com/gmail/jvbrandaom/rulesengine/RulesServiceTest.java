@@ -1,6 +1,7 @@
 package com.gmail.jvbrandaom.rulesengine;
 
 import com.gmail.jvbrandaom.rulesengine.domain.Rule;
+import com.gmail.jvbrandaom.rulesengine.exception.RuleParsingException;
 import com.gmail.jvbrandaom.rulesengine.repository.RulesRepository;
 import com.gmail.jvbrandaom.rulesengine.service.RulesService;
 import org.junit.Test;
@@ -9,7 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.io.IOException;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
@@ -25,7 +25,7 @@ public class RulesServiceTest extends BaseTest {
     private RulesRepository rulesRepository;
 
     @Test
-    public void testGetSongGenre() throws IOException {
+    public void testGetSongGenre() throws RuleParsingException {
         Rule rule1 = new Rule();
         rule1.setMaxTemperature(0.0);
         rule1.setGenre("black metal");

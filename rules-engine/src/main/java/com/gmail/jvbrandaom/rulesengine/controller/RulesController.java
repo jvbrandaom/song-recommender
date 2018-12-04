@@ -1,5 +1,6 @@
 package com.gmail.jvbrandaom.rulesengine.controller;
 
+import com.gmail.jvbrandaom.rulesengine.exception.RuleParsingException;
 import com.gmail.jvbrandaom.rulesengine.service.RulesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,7 @@ public class RulesController {
     private RulesService rulesService;
 
     @GetMapping("/song/genre/{temperature}")
-    public String getGenreBasedOnTemperature(@PathVariable Double temperature) throws IOException {
+    public String getGenreBasedOnTemperature(@PathVariable Double temperature) throws RuleParsingException {
         return rulesService.getSongGenre(temperature);
     }
 }
