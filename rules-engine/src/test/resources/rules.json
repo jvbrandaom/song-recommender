@@ -1,0 +1,20 @@
+[
+  {
+    "maxTemperature": 9,
+    "genre": "classical"
+  },
+  {
+    "minTemperature": 10,
+    "maxTemperature": 14,
+    "genre": "rock"
+  },
+  {
+    "minTemperature": 15,
+    "maxTemperature": 30,
+    "genre": "pop"
+  },
+  {
+    "minTemperature": 30,
+    "genre": "party"
+  }
+]
