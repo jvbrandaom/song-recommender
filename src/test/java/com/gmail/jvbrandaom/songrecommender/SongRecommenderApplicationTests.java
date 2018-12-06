@@ -1,9 +1,11 @@
 package com.gmail.jvbrandaom.songrecommender;
 
 import com.gmail.jvbrandaom.songrecommender.domain.Rule;
+import com.gmail.jvbrandaom.songrecommender.domain.Token;
 import com.gmail.jvbrandaom.songrecommender.exception.RuleParsingException;
 import com.gmail.jvbrandaom.songrecommender.exception.TemperatureException;
 import com.gmail.jvbrandaom.songrecommender.repository.RulesRepository;
+import com.gmail.jvbrandaom.songrecommender.service.SongService;
 import com.gmail.jvbrandaom.songrecommender.service.TemperatureService;
 import feign.FeignException;
 import org.junit.Test;
@@ -25,6 +27,8 @@ public class SongRecommenderApplicationTests {
 	private TemperatureService temperatureService;
 	@Autowired
 	private RulesRepository rulesRepository;
+	@Autowired
+	private SongService songService;
 
 	@Test
 	public void testGetRules() throws RuleParsingException {
@@ -53,5 +57,12 @@ public class SongRecommenderApplicationTests {
 	public void getTemperatureFromCoordinatesError() throws TemperatureException {
 		Double temperature = temperatureService.getTemperatureFromCoordinates(Double.MAX_VALUE, 35.0);
 		assertNotNull(temperature);
+	}
+
+	@Test
+	public void getSongApiToken() throws TemperatureException {
+		Token token = songService.getToken();
+		System.out.println(token);
+		assertNotNull(token);
 	}
 }
