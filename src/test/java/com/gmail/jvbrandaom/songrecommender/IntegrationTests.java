@@ -1,9 +1,6 @@
 package com.gmail.jvbrandaom.songrecommender;
 
-import com.gmail.jvbrandaom.songrecommender.domain.Playlist;
-import com.gmail.jvbrandaom.songrecommender.domain.PlaylistResponse;
-import com.gmail.jvbrandaom.songrecommender.domain.Rule;
-import com.gmail.jvbrandaom.songrecommender.domain.Token;
+import com.gmail.jvbrandaom.songrecommender.domain.*;
 import com.gmail.jvbrandaom.songrecommender.exception.RuleParsingException;
 import com.gmail.jvbrandaom.songrecommender.exception.TemperatureException;
 import com.gmail.jvbrandaom.songrecommender.repository.RulesRepository;
@@ -82,5 +79,10 @@ public class IntegrationTests {
 			System.out.println(playlistResponse.getPlaylists().getItems().get(0).getName());
 			assertNotNull(playlistResponse);
 		});
+	}
+
+	@Test
+	public void getSongsFromPlaylist() throws RuleParsingException {
+		List<PlaylistSongs> playlistSongs = songService.getSongs("pop");
 	}
 }
