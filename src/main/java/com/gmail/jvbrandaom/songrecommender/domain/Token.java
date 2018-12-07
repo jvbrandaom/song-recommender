@@ -11,4 +11,9 @@ public class Token {
     private String tokenType;
     @JsonProperty("expires_in")
     private Integer expiresIn;
+
+    @Override
+    public String toString() {
+        return String.format("Bearer %s", accessToken);
+    }
 }

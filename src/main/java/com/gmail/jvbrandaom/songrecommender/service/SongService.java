@@ -1,7 +1,9 @@
 package com.gmail.jvbrandaom.songrecommender.service;
 
+import com.gmail.jvbrandaom.songrecommender.domain.PlaylistResponse;
 import com.gmail.jvbrandaom.songrecommender.domain.Token;
-import com.gmail.jvbrandaom.songrecommender.restclient.SongClient;
+import com.gmail.jvbrandaom.songrecommender.restclient.SpotifyAuthorizationClient;
+import com.gmail.jvbrandaom.songrecommender.restclient.SpotifyClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -14,16 +16,22 @@ import java.util.Map;
 public class SongService {
 
     @Autowired
-    private SongClient songClient;
+    private SpotifyAuthorizationClient authorizationClient;
+    @Autowired
+    private SpotifyClient spotifyClient;
     @Value("${spotify.api.client.id}")
     private String clientId;
     @Value("${spotify.api.client.secret}")
     private String clientSecret;
 
+    public PlaylistResponse getPlaylist(String genre) {
+        return spotifyClient.getPlaylist(genre, getToken().toString());
+    }
+
     public Token getToken() {
         Map<String, String> body = new HashMap<>();
         body.put("grant_type", "client_credentials");
-        return songClient.getToken(body, getEncodedAuthorizationString());
+        return authorizationClient.getToken(body, getEncodedAuthorizationString());
     }
 
     private String getEncodedAuthorizationString() {

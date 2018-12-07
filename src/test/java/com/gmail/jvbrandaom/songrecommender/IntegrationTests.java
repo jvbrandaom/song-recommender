@@ -1,5 +1,7 @@
 package com.gmail.jvbrandaom.songrecommender;
 
+import com.gmail.jvbrandaom.songrecommender.domain.Playlist;
+import com.gmail.jvbrandaom.songrecommender.domain.PlaylistResponse;
 import com.gmail.jvbrandaom.songrecommender.domain.Rule;
 import com.gmail.jvbrandaom.songrecommender.domain.Token;
 import com.gmail.jvbrandaom.songrecommender.exception.RuleParsingException;
@@ -21,7 +23,7 @@ import static junit.framework.TestCase.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SongRecommenderApplicationTests {
+public class IntegrationTests {
 
 	@Autowired
 	private TemperatureService temperatureService;
@@ -60,9 +62,25 @@ public class SongRecommenderApplicationTests {
 	}
 
 	@Test
-	public void getSongApiToken() throws TemperatureException {
+	public void getSongApiToken() {
 		Token token = songService.getToken();
-		System.out.println(token);
-		assertNotNull(token);
+		assertNotNull(token.getAccessToken());
+	}
+
+	@Test
+	public void getPlaylist() {
+		PlaylistResponse playlistResponse = songService.getPlaylist("party");
+		System.out.println(playlistResponse.getPlaylists().getItems().get(0).getName());
+		assertNotNull(playlistResponse);
+	}
+
+	@Test
+	public void getPlaylistForAllGenresFromRules() throws RuleParsingException {
+		List<Rule> rules = rulesRepository.getRules();
+		rules.forEach(rule -> {
+			PlaylistResponse playlistResponse = songService.getPlaylist(rule.getGenre());
+			System.out.println(playlistResponse.getPlaylists().getItems().get(0).getName());
+			assertNotNull(playlistResponse);
+		});
 	}
 }
