@@ -84,6 +84,16 @@ public class IntegrationTests {
 	@Test
 	public void getSongsFromPlaylist() throws RuleParsingException {
 		PlaylistSongs playlistSongs = songService.getSongs("pop");
-		System.out.println(playlistSongs);
+		assertTrue(playlistSongs.getSongs().size() > 0);
+	}
+
+	@Test
+	public void getPlaylistSongsForAllGenresFromRules() throws RuleParsingException {
+		List<Rule> rules = rulesRepository.getRules();
+		rules.forEach(rule -> {
+			PlaylistSongs playlistSongs = songService.getSongs(rule.getGenre());
+			System.out.println(playlistSongs);
+			assertTrue(playlistSongs.getSongs().size() > 0);
+		});
 	}
 }

@@ -29,8 +29,8 @@ public class SongService {
     public PlaylistSongs getSongs(String genre) {
         String token = getToken().toString();
         PlaylistResponse playlist = spotifyClient.getPlaylist(genre, token);
-        List<String> playlistSongIds = playlist.getPlaylistSongIds();
-        return spotifyClient.getSongsFromPlaylist(playlistSongIds.get(0), token);
+        String playlistSongIds = playlist.getRandomPlaylistId();
+        return spotifyClient.getSongsFromPlaylist(playlistSongIds, token);
     }
 
     public PlaylistResponse getPlaylist(String genre) {
