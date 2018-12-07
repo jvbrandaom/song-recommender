@@ -83,7 +83,7 @@ public class IntegrationTests {
 
 	@Test
 	public void getSongsFromPlaylist() throws RuleParsingException {
-		List<PlaylistSongs> playlistSongs = songService.getSongs("pop");
+		PlaylistSongs playlistSongs = songService.getSongs("pop");
 		System.out.println(playlistSongs);
 	}
 }

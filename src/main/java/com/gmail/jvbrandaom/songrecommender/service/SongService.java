@@ -14,8 +14,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static java.util.stream.Collectors.toList;
-
 @Service
 public class SongService {
 
@@ -28,11 +26,11 @@ public class SongService {
     @Value("${spotify.api.client.secret}")
     private String clientSecret;
 
-    public List<PlaylistSongs> getSongs(String genre) {
+    public PlaylistSongs getSongs(String genre) {
         String token = getToken().toString();
         PlaylistResponse playlist = spotifyClient.getPlaylist(genre, token);
         List<String> playlistSongIds = playlist.getPlaylistSongIds();
-        return playlistSongIds.stream().map(id -> spotifyClient.getSongsFromPlaylist(id, token)).collect(toList());
+        return spotifyClient.getSongsFromPlaylist(playlistSongIds.get(0), token);
     }
 
     public PlaylistResponse getPlaylist(String genre) {
