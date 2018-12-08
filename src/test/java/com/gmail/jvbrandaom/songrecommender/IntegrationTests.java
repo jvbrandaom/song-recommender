@@ -4,6 +4,7 @@ import com.gmail.jvbrandaom.songrecommender.domain.*;
 import com.gmail.jvbrandaom.songrecommender.exception.RuleParsingException;
 import com.gmail.jvbrandaom.songrecommender.exception.TemperatureException;
 import com.gmail.jvbrandaom.songrecommender.repository.RulesRepository;
+import com.gmail.jvbrandaom.songrecommender.restclient.SpotifyClient;
 import com.gmail.jvbrandaom.songrecommender.service.SongService;
 import com.gmail.jvbrandaom.songrecommender.service.TemperatureService;
 import feign.FeignException;
@@ -17,6 +18,8 @@ import java.util.List;
 
 import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -28,6 +31,8 @@ public class IntegrationTests {
 	private RulesRepository rulesRepository;
 	@Autowired
 	private SongService songService;
+	@Autowired
+	private SpotifyClient spotifyClient;
 
 	@Test
 	public void testGetRules() throws RuleParsingException {
@@ -72,6 +77,14 @@ public class IntegrationTests {
 	}
 
 	@Test
+	public void getPlaylistFallback() {
+		PlaylistResponse playlistResponse = songService.getPlaylist("very underground swedish death metal");
+		PlaylistItem playlistItem = playlistResponse.getPlaylists().getItems().get(0);
+		assertEquals("Today's Top Hits", playlistItem.getName()	);
+		assertNotNull(playlistResponse);
+	}
+
+	@Test
 	public void getPlaylistForAllGenresFromRules() throws RuleParsingException {
 		List<Rule> rules = rulesRepository.getRules();
 		rules.forEach(rule -> {
@@ -95,5 +108,11 @@ public class IntegrationTests {
 			System.out.println(playlistSongs);
 			assertTrue(playlistSongs.getSongs().size() > 0);
 		});
+	}
+
+	@Test
+	public void getSongsFromFallback() throws RuleParsingException {
+		PlaylistSongs playlistSongs = spotifyClient.getSongsFromPlaylist("whatever", "");
+		assertThat(playlistSongs.getSongs().stream().map(Song::getArtist)).containsExactlyInAnyOrder("Journey", "Rick Astley", "Boston");
 	}
 }
