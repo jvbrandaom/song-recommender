@@ -30,25 +30,9 @@ public class SpotifyFeignConfiguration {
         return new OAuth2FeignRequestInterceptor(new DefaultOAuth2ClientContext(), resource());
     }
 
-
     @Bean
     Logger.Level feignLoggerLevel() {
         return Logger.Level.FULL;
-    }
-
-    @Bean
-    public ErrorDecoder feignContract() {
-        return new Decoder();
-    }
-
-    public class Decoder implements ErrorDecoder {
-
-        @Override
-        public Exception decode(String methodKey, Response response) {
-            System.out.println(methodKey);
-            System.out.println(response);
-            return new Exception();
-        }
     }
 
     private OAuth2ProtectedResourceDetails resource() {

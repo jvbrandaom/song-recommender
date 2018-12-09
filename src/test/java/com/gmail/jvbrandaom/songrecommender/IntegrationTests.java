@@ -7,7 +7,6 @@ import com.gmail.jvbrandaom.songrecommender.repository.RulesRepository;
 import com.gmail.jvbrandaom.songrecommender.restclient.SpotifyClient;
 import com.gmail.jvbrandaom.songrecommender.service.SongService;
 import com.gmail.jvbrandaom.songrecommender.service.TemperatureService;
-import feign.FeignException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import java.util.List;
 import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 @RunWith(SpringRunner.class)
@@ -47,19 +45,21 @@ public class IntegrationTests {
 		assertNotNull(temperature);
 	}
 
-	public void getTemperatureFromCityError() throws TemperatureException {
-		temperatureService.getTemperatureFromCity("R'lyeh");
+	@Test
+	public void getTemperatureFromCityError() {
+		Double temperatureFromCity = temperatureService.getTemperatureFromCity("R'lyeh");
+		assertThat(24.9999).isEqualTo(temperatureFromCity);
 	}
 
 	@Test
-	public void getTemperatureFromCoordinates() throws TemperatureException {
+	public void getTemperatureFromCoordinates() {
 		Double temperature = temperatureService.getTemperatureFromCoordinates(35.0, 35.0);
 		assertNotNull(temperature);
 	}
 
-	public void getTemperatureFromCoordinatesError() throws TemperatureException {
+	public void getTemperatureFromCoordinatesError() {
 		Double temperature = temperatureService.getTemperatureFromCoordinates(Double.MAX_VALUE, 35.0);
-		assertNotNull(temperature);
+		assertThat(24.9999).isEqualTo(temperature);
 	}
 
 	@Test
