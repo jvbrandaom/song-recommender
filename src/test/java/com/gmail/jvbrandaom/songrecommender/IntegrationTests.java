@@ -5,6 +5,7 @@ import com.gmail.jvbrandaom.songrecommender.exception.RuleParsingException;
 import com.gmail.jvbrandaom.songrecommender.exception.TemperatureException;
 import com.gmail.jvbrandaom.songrecommender.repository.RulesRepository;
 import com.gmail.jvbrandaom.songrecommender.restclient.SpotifyClient;
+import com.gmail.jvbrandaom.songrecommender.service.PlaylistService;
 import com.gmail.jvbrandaom.songrecommender.service.SongService;
 import com.gmail.jvbrandaom.songrecommender.service.TemperatureService;
 import org.junit.Test;
@@ -32,6 +33,8 @@ public class IntegrationTests {
 	private SongService songService;
 	@Autowired
 	private SpotifyClient spotifyClient;
+	@Autowired
+	private PlaylistService playlistService;
 
 	@Test
 	public void testGetRules() throws RuleParsingException {

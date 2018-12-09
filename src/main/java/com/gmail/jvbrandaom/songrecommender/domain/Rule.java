@@ -15,6 +15,6 @@ public class Rule implements Serializable {
     private String genre;
 
     public Boolean isTemperatureInRuleRange(Double temperature) {
-        return (minTemperature <= temperature) && (maxTemperature >= temperature);
+        return (minTemperature <= temperature) && (maxTemperature > temperature);
     }
 }

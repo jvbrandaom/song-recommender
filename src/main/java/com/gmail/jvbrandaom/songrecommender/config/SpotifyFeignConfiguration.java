@@ -2,14 +2,7 @@ package com.gmail.jvbrandaom.songrecommender.config;
 
 import feign.Logger;
 import feign.RequestInterceptor;
-import feign.Response;
-import feign.codec.ErrorDecoder;
-import feign.form.FormEncoder;
-import org.springframework.beans.factory.ObjectFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
-import org.springframework.cloud.openfeign.support.SpringEncoder;
 import org.springframework.cloud.security.oauth2.client.feign.OAuth2FeignRequestInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;

@@ -1,11 +1,11 @@
 [
   {
-    "maxTemperature": 9.0,
+    "maxTemperature": 10.0,
     "genre": "classical"
   },
   {
     "minTemperature": 10.0,
-    "maxTemperature": 14.0,
+    "maxTemperature": 15.0,
     "genre": "rock"
   },
   {
